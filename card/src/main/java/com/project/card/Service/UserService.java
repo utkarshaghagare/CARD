@@ -32,6 +32,10 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
+    private CardService cardService;
+    @Autowired
+    private UserNfcDetailsRepository userNfcDetailsRepository;
 
     public User registerNewUser(User user) throws Exception{
 
@@ -64,13 +68,6 @@ public class UserService {
 
         return adminRepository.save(admin);
     }
-
-
-@Autowired
-private CardService cardService;
-    @Autowired
-    private UserNfcDetailsRepository userNfcDetailsRepository;
-
     public UserNfcDetails addUserNfcDetails(UserNfcDetails userNfcDetails) {
         userNfcDetails.setUser(userRepository.findByEmail(JwtAuthenticationFilter.CURRENT_USER));
         return userNfcDetailsRepository.save(userNfcDetails);
